@@ -1,0 +1,7 @@
+.converter-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 45px;
+}
