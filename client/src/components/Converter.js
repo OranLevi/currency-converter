@@ -10,6 +10,8 @@ const Converter = () => {
     const [isErrorAlert, setIsErrorAlert] = useState(false);
     const [isClickConvert, setIsClickConvert] = useState(false);
     const [isClickedExchange, setIsClickedExchange] = useState(false);
+    const [convertButtonText, setConvertButtonText] = useState("Convert");
+    const [convertButtonDisable, setConvertButtonDisable] = useState(false);
 
     /* State variables related to selected currencies */
     const [selectedCurrencyFrom, setSelectedCurrencyFrom] = useState("");
@@ -45,12 +47,16 @@ const Converter = () => {
 
     function convertButton(event) {
         event.preventDefault();
+
         setIsErrorAlert(false);
         if (!amountInput || !selectedCurrencyFrom || !selectedCurrencyTo) {
             setIsErrorAlert(true);
             setErrorMessage("Please fill in all fields")
             return;
         }
+        
+        setConvertButtonText("Loading.. Please Wait.")
+        setConvertButtonDisable(true)
 
         Axios.get(`http://localhost:3001/getData/${selectedCurrencyFrom}/${selectedCurrencyTo}`, {
             selectedCurrencyFrom: selectedCurrencyFrom,
@@ -67,12 +73,17 @@ const Converter = () => {
                 setCurrencyToDisplay(selectedCurrencyTo);
                 setCurrencyAmountToDisplay(data.conversion_rates[selectedCurrencyTo]);
                 setIsClickConvert(true);
+                setConvertButtonText("Convert")
+                setConvertButtonDisable(false)
             })
             .catch(error => {
                 console.error(error);
                 setIsErrorAlert(true);
                 setErrorMessage("Check your internet connection and try again")
+                setConvertButtonText("Convert")
+                setConvertButtonDisable(false)
             });
+
     }
 
     const Error = (props) => {
@@ -108,8 +119,8 @@ const Converter = () => {
                         <DropDownMenu currency={selectedCurrencyTo} currencies={currencies} handleCurrencyChange={handleCurrencyChangeTo} name="To:" />
                     </div>
                     <div className="d-grid pt-5">
-                        <button onClick={convertButton} className="btn btn-primary" type="submit">Convert</button>
-                        
+                        <button onClick={convertButton} disabled={convertButtonDisable} className="btn btn-primary" type="submit">{convertButtonText}</button>
+
                     </div>
                 </div>
             </div>
