@@ -8,10 +8,10 @@ const app = express();
 app.use(cors());
 
 app.get("/getData/:from/:to", (req, res) => {
-    const selectedCurrenyFrom = req.params.from;
-    const selectedCurrenyTo = req.params.to;
+    const selectedCurrencyFrom = req.params.from;
+    const selectedCurrencyTo = req.params.to;
 
-    const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/${selectedCurrenyFrom}`;
+    const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/${selectedCurrencyFrom}`;
 
     https.get(url, (httpsRes) => {
       let body = "";
@@ -21,7 +21,7 @@ app.get("/getData/:from/:to", (req, res) => {
       httpsRes.on("end", () => {
         try {
           let data = JSON.parse(body);
-          console.log(data.conversion_rates[selectedCurrenyTo]);
+          console.log(data.conversion_rates[selectedCurrencyTo]);
           res.send(data);
         } catch (error) {
           console.error(error.message);
