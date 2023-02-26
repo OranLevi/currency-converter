@@ -5,3 +5,12 @@
     padding-top: 30px;
     padding-bottom: 45px;
 }
+
+.dropdown-menu {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.clicked {
+    transform: scale(1.2);
+  }
