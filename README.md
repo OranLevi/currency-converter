@@ -29,23 +29,33 @@ To run this application on your local machine, follow these steps:
    ```sh
    git clone https://github.com/OranLevi/currency-converter.git 
    
-2. Install dependencies:
+2. Open a new terminal tab or window and navigate to the server:
 
    ```sh
-   cd currency-converter
+   cd server
+ 
+3. Install dependencies for the server:
+
+   ```sh
    npm install 
-   
-3. Create a `.env` file and add your [API key from ExchangeRate-API](https://www.exchangerate-api.com/):
 
-   ```sh
-   API_KEY=YOUR_API_KEY_HERE 
-   
 4. Start the server:
 
    ```sh
    npm start
- 
-5. Open the application in your browser:
+   
+5. Install dependencies:
+
+   ```sh
+   cd ../client
+   npm install
+   
+6. Start the client:
+
+   ```sh
+   npm start
+   
+7. Open the application in your browser:
 
    ```sh
    http://localhost:3000/
